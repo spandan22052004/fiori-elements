@@ -1,0 +1,13 @@
+GET http://localhost:4004/odata/v4/catalog/PO
+
+
+
+###
+POST http://localhost:4004/odata/v4/catalog/createPO
+Content-Type: application/json
+
+{
+    "Product":"Khata",
+    "Price":299,
+    "Quantity":20
+}
