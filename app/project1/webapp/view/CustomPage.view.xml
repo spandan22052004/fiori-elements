@@ -1,29 +1,29 @@
 <mvc:View
+    controllerName="project1.controller.CustomPage"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns:macros="sap.fe.macros"
     xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:macros="sap.fe.macros"
 >
-    <macros:Page>
+    <f:DynamicPage>
+        <!-- Header -->
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Employee Dashboard" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
 
-    <macros:content>
-
-        <VBox>
-
-            <Button 
-                text="Click Me"
-                press="onPress"
-                type="Emphasized"
-            />
-
-            <macros:Table
-                id="tableClass"
-                metaPath="@com.sap.vocabularies.UI.v1.LineItem"
-                type="GridTable"
-            />
-
-        </VBox>
-
-    </macros:content>
-
-</macros:Page>
+        <!-- Content = Cards -->
+        <f:content>
+            <VBox>
+                <!-- Card 1: Event List -->
+                <macros:Table
+                    id="EmployeeTable"
+                    metaPath="@com.sap.vocabularies.UI.v1.LineItem"
+                />
+            </VBox>
+        </f:content>
+    </f:DynamicPage>
 </mvc:View>
