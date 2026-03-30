@@ -1,0 +1,29 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:macros="sap.fe.macros"
+    xmlns="sap.m"
+>
+    <macros:Page>
+
+    <macros:content>
+
+        <VBox>
+
+            <Button 
+                text="Click Me"
+                press="onPress"
+                type="Emphasized"
+            />
+
+            <macros:Table
+                id="tableClass"
+                metaPath="@com.sap.vocabularies.UI.v1.LineItem"
+                type="GridTable"
+            />
+
+        </VBox>
+
+    </macros:content>
+
+</macros:Page>
+</mvc:View>

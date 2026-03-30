@@ -43,13 +43,16 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
     "dependencies": {
       "minUI5Version": "1.146.0",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
-        "sap.fe.templates": {}
+        "sap.fe.templates": {},
+        "sap.fe.macros": {},
+        "sap.fe.core": {},
+        "sap.f": {}
       }
     },
     "contentDensities": {
@@ -81,22 +84,42 @@
       "css": []
     },
     "routing": {
-      "config": {},
+      "config": {
+        "flexibleColumnLayout": {
+          "defaultTwoColumnLayoutType": "TwoColumnsMidExpanded",
+          "defaultThreeColumnLayoutType": "ThreeColumnsMidExpanded"
+        },
+        "routerClass": "sap.f.routing.Router"
+      },
       "routes": [
         {
           "pattern": ":?query:",
           "name": "EmployeesList",
-          "target": "EmployeesList"
+          "target": [
+            "EmployeesList"
+          ]
         },
         {
           "pattern": "Employees({key}):?query:",
           "name": "EmployeesObjectPage",
-          "target": "EmployeesObjectPage"
+          "target": [
+            "EmployeesList",
+            "EmployeesObjectPage"
+          ]
         },
         {
           "pattern": "Employees({key})/to_Skills({key2}):?query:",
           "name": "SkillsObjectPage",
-          "target": "SkillsObjectPage"
+          "target": [
+            "EmployeesList",
+            "EmployeesObjectPage",
+            "SkillsObjectPage"
+          ]
+        },
+        {
+          "pattern": "customPage",
+          "name": "CustomPage",
+          "target": "CustomPage"
         }
       ],
       "targets": {
@@ -125,7 +148,9 @@
                 }
               }
             }
-          }
+          },
+          "controlAggregation": "beginColumnPages",
+          "contextPattern": ""
         },
         "EmployeesObjectPage": {
           "type": "Component",
@@ -143,7 +168,9 @@
                 }
               }
             }
-          }
+          },
+          "controlAggregation": "midColumnPages",
+          "contextPattern": "/Employees({key})"
         },
         "SkillsObjectPage": {
           "type": "Component",
@@ -154,9 +181,28 @@
               "editableHeaderContent": false,
               "contextPath": "/Employees/to_Skills"
             }
+          },
+          "controlAggregation": "endColumnPages",
+          "contextPattern": "/Employees({key})/to_Skills({key2})"
+        },
+        "CustomPage": {
+          "type": "Component",
+          "id": "CustomPage",
+          "name": "sap.fe.core.fpm",
+          "options": {
+            "settings": {
+              "viewName": "project1.view.CustomPage",
+              "contextPath": "/Employees"
+            }
           }
         }
       }
+    },
+    "rootView": {
+      "viewName": "sap.fe.templates.RootContainer.view.Fcl",
+      "type": "XML",
+      "async": true,
+      "id": "appRootView"
     }
   },
   "sap.fiori": {
