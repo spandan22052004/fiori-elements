@@ -3,7 +3,7 @@ const { func } = require("@sap/cds/lib/ql/cds-ql");
 sap.ui.define([
     "sap/fe/core/PageController",
     "sap/m/MessageToast"
-], function (PageController,MessageToast) {
+], function (PageController, MessageToast) {
     "use strict";
 
     return PageController.extend("project1.controller.CustomPage", {
@@ -12,7 +12,7 @@ sap.ui.define([
             PageController.prototype.onInit.apply(this, arguments);
         },
 
-        onPress : ()=>{
+        onPress: () => {
             MessageToast.show("Button Clicked");
         }
 

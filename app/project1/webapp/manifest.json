@@ -189,6 +189,7 @@
           "type": "Component",
           "id": "CustomPage",
           "name": "sap.fe.core.fpm",
+          "controlAggregation": "beginColumnPages",
           "options": {
             "settings": {
               "viewName": "project1.view.CustomPage",

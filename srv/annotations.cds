@@ -101,6 +101,7 @@ annotate service.Employees with @(UI: {
     {
       Label: 'Name',
       Value: name
+      
     },
     {
       Label: 'Role',
@@ -112,23 +113,28 @@ annotate service.Employees with @(UI: {
     },
     {
       Label: 'Active',
-      Value: isActive
+      Value: isActive,
+      ![@UI.PartOfPreview]: false
     },
     {
       Label: 'Joining Date',
-      Value: joinDate
+      Value: joinDate,
+      ![@UI.PartOfPreview]: false
     },
     {
       Label: 'Last Logged In',
-      Value: lastLogin
+      Value: lastLogin,
+      ![@UI.PartOfPreview]: false
     },
     {
       Label: 'Skill',
-      Value: to_Skills.name
+      Value: to_Skills.name,
+      ![@UI.PartOfPreview]: false
     },
     {
       Label: 'Height',
-      Value: height
+      Value: height,
+      ![@UI.PartOfPreview]: false
     }
   ]},
   FieldGroup #Contact     : {Data: [{
@@ -185,7 +191,6 @@ annotate service.Employees with @(UI: {Facets: [
     $Type : 'UI.ReferenceFacet',
     Label : 'Masked Value',
     Target: '@UI.FieldGroup#Phone_Secret'
-
   },
   {
     $Type : 'UI.ReferenceFacet',
