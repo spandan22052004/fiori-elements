@@ -1,0 +1,2 @@
+sap.ui.define(["sap/fe/core/PageController","sap/m/MessageToast"],function(e,t){"use strict";return e.extend("project1.controller.CustomPage",{onInit:function(){e.prototype.onInit.apply(this,arguments)},onPress:()=>{t.show("Button Clicked")}})});
+//# sourceMappingURL=CustomPage.controller.js.map

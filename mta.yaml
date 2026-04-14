@@ -59,23 +59,9 @@ modules:
     build-result: resources
     requires:
     - artifacts:
-      - employee.zip
-      name: employee
-      target-path: resources/
-    - artifacts:
       - project1.zip
       name: project1
       target-path: resources/
-- name: employee
-  type: html5
-  path: app/employee
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
 - name: project1
   type: html5
   path: app/project1

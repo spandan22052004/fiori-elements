@@ -1,0 +1,233 @@
+{
+	"_version": "1.83.0",
+	"sap.app": {
+		"id": "project1",
+		"type": "application",
+		"i18n": {
+			"bundleUrl": "i18n/i18n.properties",
+			"supportedLocales": [
+				""
+			]
+		},
+		"applicationVersion": {
+			"version": "0.0.1"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"resources": "resources.json",
+		"sourceTemplate": {
+			"id": "@sap/generator-fiori:lrop",
+			"version": "1.21.0",
+			"toolsId": "225c9cbf-1bb5-4074-9c91-9ed5d0a7359f"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/odata/v4/catalog/",
+				"type": "OData",
+				"settings": {
+					"annotations": [],
+					"odataVersion": "4.01"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"flexEnabled": false,
+		"dependencies": {
+			"minUI5Version": "1.146.0",
+			"libs": {
+				"sap.m": {},
+				"sap.ui.core": {},
+				"sap.fe.templates": {},
+				"sap.fe.macros": {},
+				"sap.fe.core": {},
+				"sap.f": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "project1.i18n.i18n",
+					"supportedLocales": [
+						""
+					]
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"preload": true,
+				"settings": {
+					"operationMode": "Server",
+					"autoExpandSelect": true,
+					"earlyRequests": true
+				}
+			},
+			"@i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties",
+				"settings": {
+					"supportedLocales": [
+						""
+					]
+				}
+			}
+		},
+		"resources": {
+			"css": []
+		},
+		"routing": {
+			"config": {
+				"flexibleColumnLayout": {
+					"defaultTwoColumnLayoutType": "TwoColumnsMidExpanded",
+					"defaultThreeColumnLayoutType": "ThreeColumnsMidExpanded"
+				},
+				"routerClass": "sap.f.routing.Router"
+			},
+			"routes": [
+				{
+					"pattern": ":?query:",
+					"name": "EmployeesList",
+					"target": [
+						"EmployeesList"
+					]
+				},
+				{
+					"pattern": "Employees({key}):?query:",
+					"name": "EmployeesObjectPage",
+					"target": [
+						"EmployeesList",
+						"EmployeesObjectPage"
+					]
+				},
+				{
+					"pattern": "Employees({key})/to_Skills({key2}):?query:",
+					"name": "SkillsObjectPage",
+					"target": [
+						"EmployeesList",
+						"EmployeesObjectPage",
+						"SkillsObjectPage"
+					]
+				},
+				{
+					"pattern": "customPage",
+					"name": "CustomPage",
+					"target": "CustomPage"
+				}
+			],
+			"targets": {
+				"EmployeesList": {
+					"type": "Component",
+					"id": "EmployeesList",
+					"name": "sap.fe.templates.ListReport",
+					"options": {
+						"settings": {
+							"contextPath": "/Employees",
+							"variantManagement": "Page",
+							"navigation": {
+								"Employees": {
+									"detail": {
+										"route": "EmployeesObjectPage"
+									}
+								}
+							},
+							"controlConfiguration": {
+								"@com.sap.vocabularies.UI.v1.LineItem": {
+									"tableSettings": {
+										"type": "ResponsiveTable",
+										"multiSelect": true,
+										"enableMassEdit": true
+									}
+								}
+							}
+						}
+					},
+					"controlAggregation": "beginColumnPages",
+					"contextPattern": ""
+				},
+				"EmployeesObjectPage": {
+					"type": "Component",
+					"id": "EmployeesObjectPage",
+					"name": "sap.fe.templates.ObjectPage",
+					"options": {
+						"settings": {
+							"editableHeaderContent": false,
+							"contextPath": "/Employees",
+							"navigation": {
+								"to_Skills": {
+									"detail": {
+										"route": "SkillsObjectPage"
+									}
+								}
+							}
+						}
+					},
+					"controlAggregation": "midColumnPages",
+					"contextPattern": "/Employees({key})"
+				},
+				"SkillsObjectPage": {
+					"type": "Component",
+					"id": "SkillsObjectPage",
+					"name": "sap.fe.templates.ObjectPage",
+					"options": {
+						"settings": {
+							"editableHeaderContent": false,
+							"contextPath": "/Employees/to_Skills"
+						}
+					},
+					"controlAggregation": "endColumnPages",
+					"contextPattern": "/Employees({key})/to_Skills({key2})"
+				},
+				"CustomPage": {
+					"type": "Component",
+					"id": "CustomPage",
+					"name": "sap.fe.core.fpm",
+					"controlAggregation": "beginColumnPages",
+					"viewLevel": 1,
+					"options": {
+						"settings": {
+							"viewName": "project1.view.CustomPage",
+							"contextPath": "/Employees"
+						}
+					}
+				}
+			}
+		},
+		"rootView": {
+			"viewName": "sap.fe.templates.RootContainer.view.Fcl",
+			"type": "XML",
+			"async": true,
+			"id": "appRootView"
+		},
+		"flexBundle": false
+	},
+	"sap.fiori": {
+		"registrationIds": [],
+		"archeType": "transactional"
+	},
+	"sap.fe": {
+		"app": {
+			"enableLazyLoading": true
+		}
+	}
+}
